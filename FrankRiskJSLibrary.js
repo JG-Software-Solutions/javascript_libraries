@@ -75,4 +75,4 @@ var FrankRiskForms = (function() {
     };
 
     return methods;
-});
+})();
