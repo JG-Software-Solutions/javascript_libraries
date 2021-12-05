@@ -33,7 +33,7 @@ var FrankRiskForms = (function() {
         WaitForCognito(function(){
             if (typeof _spPageContextInfo !== undefined && typeof Cognito !== undefined) {
                 var fields = {
-                    "UPN": _spPageContextInfo.userPrincipalName,
+                    "UPN": _spPageContextInfo.userEmail,
                     "AAD": _spPageContextInfo.aadUserId,
                     "UserDisplayName": _spPageContextInfo.userDisplayName
                 }; 
