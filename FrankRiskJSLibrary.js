@@ -36,7 +36,7 @@ var FrankRiskForms = (function() {
                     "UPN": _spPageContextInfo.userEmail,
                     "AAD": _spPageContextInfo.aadUserId,
                     "UserDisplayName": _spPageContextInfo.userDisplayName
-                }; 
+                };
                 formContext = Cognito.mount(formNumber, element).prefill(fields);
                 formContext.on('ready', function(event) {     
                     console.log("Form Fully Loaded");
