@@ -19,11 +19,11 @@ var FrankRiskForms = (function() {
 
     /*<script>
     if (typeof FrankRiskForms != 'undefined') {
-        FrankRiskForms.loadSPForm('75474567457', 1, '#form1');
+        FrankRiskForms.loadSPForm('75474567457', 1, '#form1', 'https://www.frankrisk.co.nz/liability-renewal-declaration');
     }
     </script>*/
 
-    methods.loadSPForm = function(formID, formNumber, element) {
+    methods.loadSPForm = function(formID, formNumber, element, saveURL = null) {
         var scriptLoad = document.createElement('script');
         scriptLoad.setAttribute('src', 'https://www.cognitoforms.com/f/seamless.js');
         scriptLoad.setAttribute('data-key', formID);
@@ -59,6 +59,18 @@ var FrankRiskForms = (function() {
                         cogHeader.append(row);
                     }
                 });
+
+                if (saveURL != null && saveURL != "" && saveURL != "null" && saveURL != undefined) {
+                    formContext.on('afterSave', function(event) {
+                        var link = event.data.link.split(/\#+/);
+                        if (link.length > 1) {
+                            var code = link[1];
+                            var newLink = saveURL + "#" + code;
+                            $('#cog-cog-save-resume-link').val(newLink);
+                        }
+                        $('.cog-dialog .el-dialog__wrapper .el-dialog .el-dialog__body .cog-row:last-child').remove();
+                    });
+                }
             }
         });
 
