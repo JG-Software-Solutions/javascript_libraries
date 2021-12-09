@@ -60,6 +60,8 @@ var FrankRiskForms = (function() {
                     }
                 });
 
+                
+                
                 if (saveURL != null && saveURL != "" && saveURL != "null" && saveURL != undefined) {
                     formContext.on('afterSave', function(event) {
                         var link = event.data.link.split(/\#+/);
