@@ -60,8 +60,6 @@ var FrankRiskForms = (function() {
                     }
                 });
 
-                
-                
                 if (saveURL != null && saveURL != "" && saveURL != "null" && saveURL != undefined) {
                     formContext.on('afterSave', function(event) {
                         var link = event.data.link.split(/\#+/);
@@ -70,7 +68,7 @@ var FrankRiskForms = (function() {
                             var newLink = saveURL + "#" + code;
                             $('#cog-cog-save-resume-link').val(newLink);
                         }
-                        $('.cog-dialog .el-dialog__wrapper .el-dialog .el-dialog__body .cog-row:last-child').remove();
+                        $('.cog-dialog .el-dialog__wrapper .el-dialog .el-dialog__body .cog-row:last-child').css('display', 'none');
                     });
                 }
             }
