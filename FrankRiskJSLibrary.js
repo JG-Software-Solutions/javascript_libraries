@@ -52,7 +52,7 @@ var FrankRiskForms = (function() {
                         saveButton.on('click', function() {
                             $('div.cog-form__container div.cog-page__navigation button.cog-button--save').click();
                         });
-                        var cogHeader = $($('.cog-form__container .cog-body .cog-page .cog-row')[0]);
+                        var cogHeader = $($('.cog-form__container .cog-body .cog-page')[0]);
                         var row = $('<div class="cog-col cog-col--24 cognitoForm_'+formNumber+'_floatChildButtonRight"></div>');
                         row.append(saveButton);
                         row.append(resetButton);
