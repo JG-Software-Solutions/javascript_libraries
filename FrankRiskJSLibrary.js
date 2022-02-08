@@ -57,7 +57,6 @@ var FrankRiskForms = (function() {
                         row.append(saveButton);
                         row.append(resetButton);
                         console.log(cogHeader);
-                        console.log(row);
                         cogHeader.prepend(row);
                     }
                 });
