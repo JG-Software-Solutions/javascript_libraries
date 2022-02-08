@@ -56,6 +56,8 @@ var FrankRiskForms = (function() {
                         var row = $('<div class="cog-col cog-col--24 cognitoForm_'+formNumber+'_floatChildButtonRight"></div>');
                         row.append(saveButton);
                         row.append(resetButton);
+                        console.log(cogHeader);
+                        console.log(row);
                         cogHeader.prepend(row);
                     }
                 });
