@@ -40,7 +40,7 @@ var FrankRiskForms = (function() {
                 formContext = Cognito.mount(formNumber, element).prefill(fields);
                 formContext.on('ready', function(event) {     
                     console.log("Form Fully Loaded");
-                    $('.cog-form__container').append('<style>.justify-content-end {justify-content: flex-end;} .cognitoForm_'+formNumber+'_floatChildButtonRight .cog-button {float: right !important;} .cog-dialog .el-dialog {opacity: 1 !important;}.cog-form, .cog-form > .cog-form__container {max-width: 100% !important; width: 100% !important;}</style>');
+                    $('.cog-form__container').append('<style>.justify-content-end {justify-content: flex-end !important;} .cognitoForm_'+formNumber+'_floatChildButtonRight .cog-button {float: right !important;} .cog-dialog .el-dialog {opacity: 1 !important;}.cog-form, .cog-form > .cog-form__container {max-width: 100% !important; width: 100% !important;}</style>');
                     if ($($('.cog-form__container .cog-body .cog-page .cog-row')[0]).find('.cog-button--save').length == 0) {
                         var saveButton = $('div.cog-form__container div.cog-page__navigation button.cog-button--save').clone();
                         var resetButton = $('div.cog-form__container div.cog-page__navigation button.cog-button--save').clone();
