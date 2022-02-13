@@ -40,7 +40,7 @@ var FrankRiskForms = (function() {
                 formContext = Cognito.mount(formNumber, element).prefill(fields);
                 formContext.on('ready', function(event) {     
                     console.log("Form Fully Loaded");
-                    $('.cog-form__container').append('<style>.cognitoForm_'+formNumber+'_floatChildButtonRight .cog-button {float: right !important;} .cog-dialog .el-dialog {opacity: 1 !important;}.cog-form, .cog-form > .cog-form__container {max-width: 100% !important; width: 100% !important;} [class$="floatChildButtonRight"] { margin-top: -2rem !important; }</style>');
+                    $('.cog-form__container').append('<style>.align-items-end {align-items: flex-end;} .cognitoForm_'+formNumber+'_floatChildButtonRight .cog-button {float: right !important;} .cog-dialog .el-dialog {opacity: 1 !important;}.cog-form, .cog-form > .cog-form__container {max-width: 100% !important; width: 100% !important;}</style>');
                     if ($($('.cog-form__container .cog-body .cog-page .cog-row')[0]).find('.cog-button--save').length == 0) {
                         var saveButton = $('div.cog-form__container div.cog-page__navigation button.cog-button--save').clone();
                         var resetButton = $('div.cog-form__container div.cog-page__navigation button.cog-button--save').clone();
@@ -53,7 +53,7 @@ var FrankRiskForms = (function() {
                             $('div.cog-form__container div.cog-page__navigation button.cog-button--save').click();
                         });
                         var cogHeader = $($('.cog-form__container .cog-body .cog-page')[0]);
-                        var row = $('<div class="cog-col cog-col--24 cognitoForm_'+formNumber+'_floatChildButtonRight"></div>');
+                        var row = $('<div class="cog-row align-items-end"><div class="cog-col cog-col--24 cognitoForm_'+formNumber+'_floatChildButtonRight"></div></div>');
                         row.append(saveButton);
                         row.append(resetButton);
                         console.log(cogHeader);
