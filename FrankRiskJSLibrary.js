@@ -53,10 +53,9 @@ var FrankRiskForms = (function() {
                             $('div.cog-form__container div.cog-page__navigation button.cog-button--save').click();
                         });
                         var cogHeader = $($('.cog-form__container .cog-body .cog-page')[0]);
-                        var row = $('<div class="cog-row align-items-end"><div class="cog-col cog-col--24 cognitoForm_'+formNumber+'_floatChildButtonRight"></div></div>');
-                        row.append(saveButton);
-                        row.append(resetButton);
-                        console.log(cogHeader);
+                        var row = $('<div class="cog-row align-items-end"><div class="cog-col cog-col--4 cognitoForm_'+formNumber+'_floatChildButtonRight"></div></div>');
+                        row.find('.cog-col').append(saveButton);
+                        row.find('.cog-col').append(resetButton);
                         cogHeader.prepend(row);
                     }
                 });
