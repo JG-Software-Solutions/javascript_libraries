@@ -67,7 +67,7 @@ var FrankRiskForms = (function() {
                         var resetButton = saveButton.clone();
 
                         //Create Save buttons DIV
-                        var buttonsContainer = $('<div class="cog-col cog-col--4 jg_floatChildButtonRight"></div>')
+                        var buttonsContainer = $('<div class="cog-col cog-col--6 jg_floatChildButtonRight"></div>')
 
                         //Get the text node and rename it to "Reset"
                         resetButton.find('.cog-button__text').text("Reset Form");
@@ -114,7 +114,7 @@ var FrankRiskForms = (function() {
                             buttons.push(backButton);
                         }
 
-                        var navButtons = $('<div class="cog-col cog-col--4 jg_floatChildButtonLeft"></div>');
+                        var navButtons = $('<div class="cog-col cog-col--6 jg_floatChildButtonLeft"></div>');
 
                         for (var i = 0; i < buttons.length; i++) {
                             navButtons.prepend(buttons[i]);
@@ -126,11 +126,11 @@ var FrankRiskForms = (function() {
                     //Set spacing class depending on the number of children, if no child elements then don't add the row to the form
                     if (navigationRow.children().length == 1) {
                         navigationRow.addClass('justify-content-end');
-                        $($('.cog-form__container .cog-body .cog-page')[0]).prepend(navigationRow);
+                        $('.cog-form__container .cog-body').prepend(navigationRow);
                     }
                     else if (navigationRow.children().length == 2) {
                         navigationRow.addClass('justify-content-spacebetween');
-                        $($('.cog-form__container .cog-body .cog-page')[0]).prepend(navigationRow);
+                        $('.cog-form__container .cog-body').prepend(navigationRow);
                     }
                     
                 }
