@@ -136,7 +136,7 @@ var FrankRiskForms = (function() {
                 }
                 
                 formContext.on('afterNavigate', function(event) {
-                    
+                    addButtons();
                 });
 
                 if (saveURL != null && saveURL != "" && saveURL != "null" && saveURL != undefined) {
