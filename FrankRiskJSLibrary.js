@@ -49,11 +49,13 @@ var FrankRiskForms = (function() {
                     addButtons();
                 });
                 
-                function addButtons(page = null) {
+                function addButtons(page = "") {
                     var cogpage = $('.cog-form__container .cog-body div.cog-page'+page);
 
+                    var cogbody = $('.cog-form__container .cog-body');
+
                     //Remove existing nav and re-evaluate
-                    cogpage.find('.cog-row .jg_navigation').remove();
+                    cogbody.find('.jg_navigation').remove();
 
                     //Create new Navigation Row
                     var navigationRow = $('<div class="cog-row jg_navigation"></div>');
@@ -136,7 +138,7 @@ var FrankRiskForms = (function() {
                 }
                 
                 formContext.on('afterNavigate', function(event) {
-                    var filter = '[data-page="'+event.destinationPage.number+'"]';
+                    var filter = '[data-page="'+event.data.destinationPage.number+'"]';
                     addButtons(filter);
                 });
 
