@@ -59,6 +59,14 @@ var FrankRiskForms = (function() {
                         cogHeader.prepend(row);
                     }
                 });
+                
+                function addButtons() {
+                    
+                }
+                
+                formContext.on('afterNavigate', function(event) {
+                    
+                }
 
                 if (saveURL != null && saveURL != "" && saveURL != "null" && saveURL != undefined) {
                     formContext.on('afterSave', function(event) {
