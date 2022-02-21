@@ -17,6 +17,12 @@ var FrankRiskForms = (function() {
     script.src = "https://cdn.jsdelivr.net/gh/JG-Software-Solutions/javascript_libraries@release/jquery-3.6.0.js?v="+version;
     document.getElementsByTagName('head')[0].appendChild(script);
 
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://cdn.jsdelivr.net/gh/JG-Software-Solutions/javascript_libraries@release/FrankRisk.css?v="+version;
+    link.crossorigin = "anonymous";
+    document.getElementsByTagName('head')[0].appendChild(link);
+
     /*<script>
     if (typeof FrankRiskForms != 'undefined') {
         FrankRiskForms.loadSPForm('75474567457', 1, '#form1', 'https://www.frankrisk.co.nz/liability-renewal-declaration');
@@ -40,24 +46,97 @@ var FrankRiskForms = (function() {
                 formContext = Cognito.mount(formNumber, element).prefill(fields);
                 formContext.on('ready', function(event) {     
                     console.log("Form Fully Loaded");
-                    $('.cog-form__container').append('<style>.justify-content-end {justify-content: flex-end !important;} .cognitoForm_'+formNumber+'_floatChildButtonRight .cog-button {float: right !important;} .cog-dialog .el-dialog {opacity: 1 !important;}.cog-form, .cog-form > .cog-form__container {max-width: 100% !important; width: 100% !important;}</style>');
-                    if ($($('.cog-form__container .cog-body .cog-page .cog-row')[0]).find('.cog-button--save').length == 0) {
+                    addButtons();
+                });
+                
+                function addButtons() {
+                    var cogpage = $($('.cog-form__container .cog-body .cog-page')[0]);
+
+                    //Remove existing nav and re-evaluate
+                    cogpage.find('.cog-row .jg_navigation').remove();
+
+                    //Create new Navigation Row
+                    var navigationRow = $('<div class="cog-row jg_navigation"></div>');
+
+                    //If Save Button Exists copy to top
+                    if (cogpage.find('.cog-page__navigation .cog-button--save').length != 0) {
+                        //Clone Existing Save Button
                         var saveButton = $('div.cog-form__container div.cog-page__navigation button.cog-button--save').clone();
-                        var resetButton = $('div.cog-form__container div.cog-page__navigation button.cog-button--save').clone();
+
+                        //Clone the template button for reset function
+                        var resetButton = saveButton.clone();
+
+                        //Create Save buttons DIV
+                        var buttonsContainer = $('<div class="cog-col cog-col--4 jg_floatChildButtonRight"></div>')
+
+                        //Get the text node and rename it to "Reset"
                         resetButton.find('.cog-button__text').text("Reset Form");
+
+                        //When our reset button is clicked modify the href to remove the save url section
                         resetButton.on('click', function() {
                             window.location.href = window.location.href.split('#')[0];
                         });
-                        resetButton.css('margin-right', '1rem');
+
+                        //Add some margin to seperate the reset and save buttons
+                        resetButton.css('margin', '0 1rem');
+
+                        //When our save button is clicked just mimic clicking the save button at the bottom
                         saveButton.on('click', function() {
                             $('div.cog-form__container div.cog-page__navigation button.cog-button--save').click();
                         });
-                        var cogHeader = $($('.cog-form__container .cog-body .cog-page')[0]);
-                        var row = $('<div class="cog-row justify-content-end"><div class="cog-col cog-col--4 cognitoForm_'+formNumber+'_floatChildButtonRight"></div></div>');
-                        row.find('.cog-col').append(saveButton);
-                        row.find('.cog-col').append(resetButton);
-                        cogHeader.prepend(row);
+
+                        //append the save and reset buttons to the container
+                        buttonsContainer.append(resetButton);
+                        buttonsContainer.append(saveButton);
+                        
+                        navigationRow.append(buttonsContainer);
                     }
+
+                    //If the page has a progress bar then it has multiple pages we need to account for
+                    if (cogpage.find('.cog-page-progress').length == 0) {
+                        var buttons = [];
+
+                        if(cogpage.find('.cog-page__navigation .cog-button--navigation.cog-button--next').length != 0) {
+                            var nextButton = cogpage.find('.cog-page__navigation .cog-button--navigation.cog-button--next').clone();
+                            nextButton.on('click', function() {
+                                $('div.cog-form__container div.cog-page__navigation .cog-button--navigation.cog-button--next').click();
+                            });
+                            nextButton.css('margin', '0 1rem');
+                            buttons.push(nextButton);
+                        }
+
+                        if(cogpage.find('.cog-page__navigation .cog-button--navigation.cog-button--back').length != 0) {
+                            var backButton = cogpage.find('.cog-page__navigation .cog-button--navigation.cog-button--back').clone();
+                            backButton.on('click', function() {
+                                $('div.cog-form__container div.cog-page__navigation .cog-button--navigation.cog-button--back').click();
+                            });
+                            backButton.css('margin', '0 1rem');
+                            buttons.push(backButton);
+                        }
+
+                        var navButtons = $('<div class="cog-col cog-col--4 jg_floatChildButtonLeft"></div>');
+
+                        for (var i = 0; i < buttons.length; i++) {
+                            navButtons.prepend(buttons[i]);
+                        }
+
+                        navigationRow.prepend(navButtons);
+                    }
+
+                    //Set spacing class depending on the number of children, if no child elements then don't add the row to the form
+                    if (navigationRow.children().length == 1) {
+                        navigationRow.addClass('justify-content-end');
+                        $($('.cog-form__container .cog-body .cog-page')[0]).prepend(navigationRow);
+                    }
+                    else if (navigationRow.children().length == 2) {
+                        navigationRow.addClass('justify-content-spacebetween');
+                        $($('.cog-form__container .cog-body .cog-page')[0]).prepend(navigationRow);
+                    }
+                    
+                }
+                
+                formContext.on('afterNavigate', function(event) {
+                    addButtons();
                 });
 
                 if (saveURL != null && saveURL != "" && saveURL != "null" && saveURL != undefined) {
