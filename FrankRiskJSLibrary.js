@@ -120,7 +120,7 @@ var FrankRiskForms = (function() {
                             navButtons.prepend(buttons[i]);
                         }
 
-                        navigationRow.append(navButtons);
+                        navigationRow.prepend(navButtons);
                     }
 
                     //Set spacing class depending on the number of children, if no child elements then don't add the row to the form
