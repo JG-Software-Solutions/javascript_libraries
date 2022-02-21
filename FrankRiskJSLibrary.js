@@ -17,6 +17,12 @@ var FrankRiskForms = (function() {
     script.src = "https://cdn.jsdelivr.net/gh/JG-Software-Solutions/javascript_libraries@release/jquery-3.6.0.js?v="+version;
     document.getElementsByTagName('head')[0].appendChild(script);
 
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://cdn.jsdelivr.net/gh/JG-Software-Solutions/javascript_libraries@release/FrankRisk.css?v="+version;
+    link.crossorigin = "anonymous";
+    document.getElementsByTagName('head')[0].appendChild(link);
+
     /*<script>
     if (typeof FrankRiskForms != 'undefined') {
         FrankRiskForms.loadSPForm('75474567457', 1, '#form1', 'https://www.frankrisk.co.nz/liability-renewal-declaration');
@@ -40,7 +46,6 @@ var FrankRiskForms = (function() {
                 formContext = Cognito.mount(formNumber, element).prefill(fields);
                 formContext.on('ready', function(event) {     
                     console.log("Form Fully Loaded");
-                    $('.cog-form__container').append('<style>.justify-content-spacebetween {justify-content: space-between !important;} .justify-content-end {justify-content: flex-end !important;} .cognitoForm_'+formNumber+'_floatChildButtonRight .cog-button {float: right !important;} .cog-dialog .el-dialog {opacity: 1 !important;}.cog-form, .cog-form > .cog-form__container {max-width: 100% !important; width: 100% !important;}</style>');
                     addButtons();
                 });
                 
@@ -62,7 +67,7 @@ var FrankRiskForms = (function() {
                         var resetButton = saveButton.clone();
 
                         //Create Save buttons DIV
-                        var buttonsContainer = $('<div class="cog-col cog-col--4 cognitoForm_'+formNumber+'_floatChildButtonRight"></div>')
+                        var buttonsContainer = $('<div class="cog-col cog-col--4 jg_floatChildButtonRight"></div>')
 
                         //Get the text node and rename it to "Reset"
                         resetButton.find('.cog-button__text').text("Reset Form");
@@ -73,7 +78,7 @@ var FrankRiskForms = (function() {
                         });
 
                         //Add some margin to seperate the reset and save buttons
-                        resetButton.css('margin-right', '1rem');
+                        resetButton.css('margin', '0 1rem');
 
                         //When our save button is clicked just mimic clicking the save button at the bottom
                         saveButton.on('click', function() {
@@ -109,7 +114,7 @@ var FrankRiskForms = (function() {
                             buttons.push(backButton);
                         }
 
-                        var navButtons = $('<div class="cog-col cog-col--4 cognitoForm_'+formNumber+'_floatChildButtonLeft"></div>');
+                        var navButtons = $('<div class="cog-col cog-col--4 jg_floatChildButtonLeft"></div>');
 
                         for (var i = 0; i < buttons.length; i++) {
                             navButtons.prepend(buttons[i]);
