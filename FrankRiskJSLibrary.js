@@ -50,7 +50,7 @@ var FrankRiskForms = (function() {
                 });
                 
                 function addButtons() {
-                    var cogpage = $($('.cog-form__container .cog-body .cog-page')[0]);
+                    var cogpage = $('.cog-form__container .cog-body');
 
                     //Remove existing nav and re-evaluate
                     cogpage.find('.cog-row .jg_navigation').remove();
