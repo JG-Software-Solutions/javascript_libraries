@@ -201,7 +201,7 @@ var FrankRiskForms = (function() {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            url: site_url + "/_api/web/lists(guid'"+list_guid+"')/items",
+            url: site_url + "/_api/web/lists(guid'"+list_guid+"')/items?$orderby=Title asc",
             method: "GET",
             success: function (data) {
                 data = data.value;
