@@ -6,6 +6,20 @@
         script.src = "https://cdn.jsdelivr.net/gh/JG-Software-Solutions/javascript_libraries@release/FrankRiskJSLibrary.js?v="+version;
         document.getElementsByTagName('head')[0].appendChild(script);
     }    
+
+    WaitForLibrary(function() {
+        //Run Functions
+    });
+    
+    function WaitForLibrary(callback) {
+        if (typeof FrankRiskForms !== "undefined" && typeof $ !== "undefined") {
+            callback();
+        } else {
+            setTimeout(function() {
+            WaitForLibrary(callback);
+            }, 100);
+        }
+    };
 </script>
 */
 
@@ -17,11 +31,24 @@ var FrankRiskForms = (function() {
     script.src = "https://cdn.jsdelivr.net/gh/JG-Software-Solutions/javascript_libraries@release/jquery-3.6.0.js?v="+version;
     document.getElementsByTagName('head')[0].appendChild(script);
 
+    var script = document.createElement("script");
+    var version = new Date().getTime();
+    script.src = "https://cdn.jsdelivr.net/gh/JG-Software-Solutions/javascript_libraries@release/jg_bootstrap.bundle.js?v="+version;
+    document.getElementsByTagName('head')[0].appendChild(script);
+
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://cdn.jsdelivr.net/gh/JG-Software-Solutions/javascript_libraries@release/jg_bootstrap.css?v="+version;
+    link.crossorigin = "anonymous";
+    document.getElementsByTagName('head')[0].appendChild(link);
+
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "https://cdn.jsdelivr.net/gh/JG-Software-Solutions/javascript_libraries@release/FrankRisk.css?v="+version;
     link.crossorigin = "anonymous";
     document.getElementsByTagName('head')[0].appendChild(link);
+
+    
 
     /*<script>
     if (typeof FrankRiskForms != 'undefined') {
@@ -167,6 +194,35 @@ var FrankRiskForms = (function() {
             }
         }
     };
+
+    methods.buildListPage = function (site_url, element_id, list_guid, column_width = 4) {
+        $.ajax({
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            url: site_url + "/_api/web/lists(guid'"+list_guid+"')/items",
+            method: "GET",
+            success: function (data) {
+                data = data.value;
+                $('.mainContent .SPCanvas #' + element_id).append(buildBootstrapGridFromSharePointList(data, column_width));
+            }
+        });
+    };
+
+    function buildBootstrapGridFromSharePointList(list_array, column_width) {
+        var row = $('<div class="jg_bs row"></div>');
+        for (var i = 0; i < list_array.length; i++) {
+            var col = $('<div class="col-'+column_width+'"></div>');
+            col.append(button(list_array[i].Form_x0020_Link.Url, list_array[i].Title));
+            row.append(col);
+        }
+        return row;
+    };
+
+    function button(href, text) {
+        return $('<a class="jg_bs btn btn-default btn-warning" href="'+href+'">'+text+'</a>');
+    }
 
     return methods;
 })();
