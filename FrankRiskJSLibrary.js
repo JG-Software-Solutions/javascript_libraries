@@ -211,7 +211,7 @@ var FrankRiskForms = (function() {
     };
 
     function buildBootstrapGridFromSharePointList(list_array, column_width) {
-        var row = $('<div class="jg_bs row"></div>');
+        var row = $('<div class="jg_bs row g-5 mx-5 text-center"></div>');
         for (var i = 0; i < list_array.length; i++) {
             var col = $('<div class="col-'+column_width+'"></div>');
             col.append(button(list_array[i].Form_x0020_Link.Url, list_array[i].Title));
