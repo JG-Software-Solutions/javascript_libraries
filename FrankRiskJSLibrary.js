@@ -215,22 +215,8 @@ var FrankRiskForms = (function() {
                         //Clone Existing Save Button
                         var saveButton = cogpage.find('div.cog-page__navigation button.cog-button--save').clone();
 
-                        //Clone the template button for reset function
-                        var resetButton = saveButton.clone();
-
                         //Create Save buttons DIV
                         var buttonsContainer = $('<div class="cog-col cog-col--6 jg_floatChildButtonRight"></div>')
-
-                        //Get the text node and rename it to "Reset"
-                        resetButton.find('.cog-button__text').text("Reset Form");
-
-                        //When our reset button is clicked modify the href to remove the save url section
-                        resetButton.on('click', function() {
-                            window.location.href = window.location.href.split('#')[0];
-                        });
-
-                        //Add some margin to seperate the reset and save buttons
-                        resetButton.css('margin', '0 1rem');
 
                         //When our save button is clicked just mimic clicking the save button at the bottom
                         saveButton.on('click', function() {
@@ -238,7 +224,7 @@ var FrankRiskForms = (function() {
                         });
 
                         //append the save and reset buttons to the container
-                        buttonsContainer.append(resetButton);
+
                         buttonsContainer.append(saveButton);
                         
                         navigationRow.append(buttonsContainer);
