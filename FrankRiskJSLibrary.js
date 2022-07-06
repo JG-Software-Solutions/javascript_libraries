@@ -136,8 +136,7 @@ var FrankRiskForms = (function() {
                                     });
                                     nextButton.css('margin', '0 1rem');
                                     buttons.push(nextButton);
-                                }
-        
+                                }        
                                 if(cogpage.find('.cog-page__navigation .cog-button--navigation.cog-button--back').length != 0) {
                                     var backButton = cogpage.find('.cog-page__navigation .cog-button--navigation.cog-button--back').first().clone();
                                     backButton.on('click', function() {
