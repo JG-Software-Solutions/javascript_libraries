@@ -68,11 +68,11 @@ var FrankRiskForms = (function() {
                 $.ajax({
                     url: "/_api/web/CurrentUser",
                     success: function(SPContext) {
-                        var fields = {
+                        /*var fields = {
                             "UPN": SPContext.UserPrincipalName,
                             "UserDisplayName": SPContext.Title
-                        }; 
-                        formContext = Cognito.mount(formNumber, element).prefill(fields);
+                        }; */
+                        formContext = Cognito.mount(formNumber, element)/*.prefill(fields)*/;
                         formContext.on('ready', function(event) {     
                             console.log("Form Fully Loaded");
                             addButtons();
